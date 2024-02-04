@@ -1,4 +1,4 @@
-export let PopularAnimeQuery = `
+export const PopularAnimeQuery = `
 	query($perPage: Int, $page: Int) {
 		Page(page: $page, perPage: $perPage) {
 			pageInfo {
@@ -29,7 +29,7 @@ export let PopularAnimeQuery = `
 	}
 `;
 
-export let TrendingAnimeQuery = `
+export const TrendingAnimeQuery = `
 	query($perPage: Int, $page: Int) {
 		Page(page: $page, perPage: $perPage) {
 			pageInfo {

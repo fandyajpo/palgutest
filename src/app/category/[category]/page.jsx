@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CAnimeList from "../../../components/List/Category/";
+import CAnimeList from "../../../components/List/Category/CAnimelist";
 import {
   TrendingAnimeQuery,
   PopularAnimeQuery,
