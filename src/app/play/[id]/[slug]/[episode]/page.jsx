@@ -2,9 +2,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BiArrowToBottom, BiFullscreen } from "react-icons/bi";
-import { HiArrowSmLeft, HiArrowSmRight, HiOutlineSwitchHorizontal } from "react-icons/hi";
-import { searchByIdQuery } from "@/helper/searchQueryStrings";
-import VideoPlayer from "@/components/Player/VideoPlayer";
+import {
+  HiArrowSmLeft,
+  HiArrowSmRight,
+  HiOutlineSwitchHorizontal,
+} from "react-icons/hi";
+import { searchByIdQuery } from "../../../../../helper/searchQueryStrings";
+import VideoPlayer from "../../../../../components/Player/VideoPlayer";
 import Link from "next/link";
 
 const Page = () => {
@@ -33,14 +37,21 @@ const Page = () => {
   async function getEpisodeLinks() {
     setLoading(true);
     window.scrollTo(0, 0);
-    let res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/getmixlinks?id=${slug}&ep=${episode}`);
+    let res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}api/getmixlinks?id=${slug}&ep=${episode}`
+    );
     setEpisodeLinks(res.data);
 
     setCurrentServer(res.data.gogoLink);
     if (!res.data.sources) {
       setInternalPlayer(true);
     }
-    updateLocalStorage(res.data.animeId, res.data.episodeNum, mal_id, res.data.isDub);
+    updateLocalStorage(
+      res.data.animeId,
+      res.data.episodeNum,
+      mal_id,
+      res.data.isDub
+    );
     let aniRes = await axios({
       url: process.env.NEXT_PUBLIC_BASE_URL,
       method: "POST",
@@ -104,7 +115,11 @@ const Page = () => {
 
   return (
     <div>
-      {loading && <div className="h-screen w-screen flex justify-center items-center">Loading..</div>}
+      {loading && (
+        <div className="h-screen w-screen flex justify-center items-center">
+          Loading..
+        </div>
+      )}
       {!loading && (
         <div className="mx-10 my-5">
           {episodeLinks && animeDetails && currentServer !== "" && (
@@ -112,18 +127,29 @@ const Page = () => {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <p className="text-white text-xl font-semibold">
-                    <span>{`${animeDetails.title.english !== null ? animeDetails.title.english : animeDetails.title.userPreferred}`}</span>
+                    <span>{`${
+                      animeDetails.title.english !== null
+                        ? animeDetails.title.english
+                        : animeDetails.title.userPreferred
+                    }`}</span>
                     {` Episode - ${episode}`}
                     {/* ${episodeLinks.isDub ? "(Dub)" : "(Sub)"} */}
                   </p>
                   <div className="flex items-center">
-                    <Link href={episodeLinks.downloadLink} target="_blank" rel="noopener noreferrer" className="text-white flex items-center mr-3">
+                    <Link
+                      href={episodeLinks.downloadLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white flex items-center mr-3"
+                    >
                       <span>Download</span>
                       <BiArrowToBottom className="ml-1" />
                     </Link>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 font-light">If the video player doesn't load or if blank refresh the page</p>
+                <p className="text-sm text-gray-400 font-light">
+                  If the video player doesn't load or if blank refresh the page
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 my-4">
@@ -142,13 +168,32 @@ const Page = () => {
 
                   <div className="flex justify-around mt-4">
                     {parseInt(episode) > 1 && (
-                      <button onClick={() => handleNavigation(`/play/${mal_id}/${episodeLinks.animeId}/${parseInt(episode) - 1}`)} className="text-white text-lg font-semibold flex items-center">
+                      <button
+                        onClick={() =>
+                          handleNavigation(
+                            `/play/${mal_id}/${episodeLinks.animeId}/${
+                              parseInt(episode) - 1
+                            }`
+                          )
+                        }
+                        className="text-white text-lg font-semibold flex items-center"
+                      >
                         <HiArrowSmLeft />
                         <span className="ml-1">Previous</span>
                       </button>
                     )}
-                    {parseInt(episode) < parseInt(episodeLinks.totalEpisodes) && (
-                      <button onClick={() => handleNavigation(`/play/${mal_id}/${episodeLinks.animeId}/${parseInt(episode) + 1}`)} className="text-white text-lg font-semibold flex items-center">
+                    {parseInt(episode) <
+                      parseInt(episodeLinks.totalEpisodes) && (
+                      <button
+                        onClick={() =>
+                          handleNavigation(
+                            `/play/${mal_id}/${episodeLinks.animeId}/${
+                              parseInt(episode) + 1
+                            }`
+                          )
+                        }
+                        className="text-white text-lg font-semibold flex items-center"
+                      >
                         <span className="mr-1">Next</span>
                         <HiArrowSmRight />
                       </button>
@@ -161,15 +206,25 @@ const Page = () => {
                     <p className="text-white text-lg font-semibold">Episodes</p>
                   </div>
                   <div className="grid grid-cols-5 gap-4">
-                    {[...Array(parseInt(episodeLinks.totalEpisodes))].map((x, i) => (
-                      <button
-                        key={i}
-                        onClick={() => handleNavigation(`/play/${mal_id}/${episodeLinks.animeId}/${parseInt(i) + 1}`)}
-                        className={`text-white text-center border border-gray-700 rounded-md py-2 hover:bg-blue-600 ${i + 1 <= parseInt(episode) ? "bg-blue-600" : ""}`}
-                      >
-                        {i + 1}
-                      </button>
-                    ))}
+                    {[...Array(parseInt(episodeLinks.totalEpisodes))].map(
+                      (x, i) => (
+                        <button
+                          key={i}
+                          onClick={() =>
+                            handleNavigation(
+                              `/play/${mal_id}/${episodeLinks.animeId}/${
+                                parseInt(i) + 1
+                              }`
+                            )
+                          }
+                          className={`text-white text-center border border-gray-700 rounded-md py-2 hover:bg-blue-600 ${
+                            i + 1 <= parseInt(episode) ? "bg-blue-600" : ""
+                          }`}
+                        >
+                          {i + 1}
+                        </button>
+                      )
+                    )}
                   </div>
                 </div>
               </div>

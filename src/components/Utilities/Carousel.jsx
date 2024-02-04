@@ -2,10 +2,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
 import { BsFillPlayFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
-import { TrendingAnimeQuery } from "@/helper/searchQueryStrings";
+import { TrendingAnimeQuery } from "../../helper/searchQueryStrings";
 import Link from "next/link";
 
 import "swiper/swiper-bundle.css";
@@ -64,7 +70,11 @@ const Carousel = () => {
             item.bannerImage !== null && (
               <SwiperSlide key={index}>
                 <div className="relative">
-                  <img src={item.bannerImage} alt="" className="w-full h-64 md:h-80 object-cover rounded-md" />
+                  <img
+                    src={item.bannerImage}
+                    alt=""
+                    className="w-full h-64 md:h-80 object-cover rounded-md"
+                  />
                   <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/90 via-gray-800/70 to-transparent rounded-md">
                     <div className="flex justify-between items-center text-white px-6 pt-12">
                       <p className="font-semibold text-xl">
@@ -87,14 +97,30 @@ const Carousel = () => {
                           },
                         }}
                       >
-                        <Link href={"anime/" + item.idMal} className="flex items-center">
+                        <Link
+                          href={"anime/" + item.idMal}
+                          className="flex items-center"
+                        >
                           <div className="md:hidden inline-block rounded-full border border-indigo-600 bg-indigo-600 p-2 text-white hover:bg-indigo-100 hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500">
                             <BsFillPlayFill />
                           </div>
                           <div className="ml-1 hidden md:inline-flex items-center gap-2 rounded border border-indigo-600 bg-indigo-600 px-8 py-3 text-white hover:bg-indigo-100 hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500">
-                            <span className="text-sm font-medium">Watch Now</span>
-                            <svg className="h-5 w-5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            <span className="text-sm font-medium">
+                              Watch Now
+                            </span>
+                            <svg
+                              className="h-5 w-5 rtl:rotate-180"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                              />
                             </svg>
                           </div>
                         </Link>

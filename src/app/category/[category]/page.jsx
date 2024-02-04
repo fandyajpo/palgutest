@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CAnimeList from "@/components/List/Category/CAnimeList";
-import { TrendingAnimeQuery, PopularAnimeQuery, top100AnimeQuery, favouritesAnimeQuery } from "@/helper/searchQueryStrings";
+import CAnimeList from "../../../components/List/Category/";
+import {
+  TrendingAnimeQuery,
+  PopularAnimeQuery,
+  top100AnimeQuery,
+  favouritesAnimeQuery,
+} from "../../../helper/searchQueryStrings";
 
 const Page = () => {
   const [category, setCategory] = useState(null);
@@ -32,7 +37,11 @@ const Page = () => {
   }
 
   if (!query) {
-    return <div className="h-screen w-screen flex justify-center items-center">Loading..</div>;
+    return (
+      <div className="h-screen w-screen flex justify-center items-center">
+        Loading..
+      </div>
+    );
   }
 
   return (
