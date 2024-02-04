@@ -6,7 +6,7 @@ import {
   PopularAnimeQuery,
   top100AnimeQuery,
   favouritesAnimeQuery,
-} from "@/helper/searchQueryStrings";
+} from "../helper/searchQueryStrings";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function Home() {
